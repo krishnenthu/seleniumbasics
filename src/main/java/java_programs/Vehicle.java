@@ -6,3 +6,5 @@ public class Vehicle {
         System.out.println("This is from vehicle");
     }
 }
+
+
