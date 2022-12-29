@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -39,9 +40,10 @@ public class SeleniumBasics {
         testInitialize("Chrome");
     }
 
-    /* @AfterMethod
+  /*  @AfterMethod
       public void tearDown() {
           driver.close();
+        //driver.quit();
       }*/
     @Test
     public void TC_001_verifyObsquraTitle() {
@@ -82,57 +84,96 @@ public class SeleniumBasics {
         Assert.assertEquals(actualTotal, expectedTotal, "Result matched");
     }
 
-    /*** Homework starts **/
-
     @Test
     public void TC_004_verifyEmptyFieldsValidation() {
 
         driver.get("https://selenium.obsqurazone.com/form-submit.php");
         WebElement submitbutton = driver.findElement(By.xpath("//button[text()='Submit form']"));
         submitbutton.click();
-
         WebElement firstnameValidation = driver.findElement(By.xpath("//input[@id='validationCustom01']//following-sibling::div[1]"));
         String FirstnameValidationActual = firstnameValidation.getText();
         String FirstnameValidationExpected = "Please enter First name.";
         Assert.assertEquals(FirstnameValidationActual, FirstnameValidationExpected, "Firstname field validation message is not correct");
-
         WebElement lastnameValidation = driver.findElement(By.xpath("//input[@id='validationCustom02']//following-sibling::div[1]"));
         String LastnameValidationActual = lastnameValidation.getText();
         String LastnameValidationExpected = "Please enter Last name.";
         Assert.assertEquals(LastnameValidationActual, LastnameValidationExpected, "Lastname field validation message is not correct");
-
         WebElement usernameValidation = driver.findElement(By.xpath("//input[@id='validationCustomUsername']//following-sibling::div[1]"));
         String UsernameValidationActual = usernameValidation.getText();
         String UsernameValidationExpected = "Please choose a username.";
         Assert.assertEquals(UsernameValidationActual, UsernameValidationExpected, "Username field validation message is not correct");
-
         WebElement cityValidation = driver.findElement(By.xpath("//input[@id='validationCustom03']//following-sibling::div[1]"));
         String cityValidationActual = cityValidation.getText();
         String cityValidationExpected = "Please provide a valid city.";
         Assert.assertEquals(cityValidationActual, cityValidationExpected, "City field validation message is not correct");
-
         WebElement stateValidation = driver.findElement(By.xpath("//input[@id='validationCustom04']//following-sibling::div[1]"));
         String stateValidationActual = stateValidation.getText();
         String stateValidationExpected = "Please provide a valid state.";
         Assert.assertEquals(stateValidationActual, stateValidationExpected, "State field validation message is not correct");
-
         WebElement zipValidation = driver.findElement(By.xpath("//input[@id='validationCustom05']//following-sibling::div[1]"));
         String zipValidationActual = zipValidation.getText();
-        String zipValidationExpected = "Please provide a valid state.";
+        String zipValidationExpected = "Please provide a valid zip.";
         Assert.assertEquals(zipValidationActual, zipValidationExpected, "zip field validation message is not correct");
-
         WebElement termsValidation = driver.findElement(By.xpath("//input[@id='invalidCheck']//following-sibling::div[1]"));
         String termsValidationActual = termsValidation.getText();
         String termsValidationExpected = "You must agree before submitting.";
         Assert.assertEquals(termsValidationActual, termsValidationExpected, "Terms and conditions validation message is not correct");
     }
 
-    /**
-     * Homework ends
-     **/
 
     @Test
-    public void TC_005_verifyNewsLetterSubscription() {
+    public void TC_005_verifyEmptyFieldCityStateValidation() {
+
+        driver.get("https://selenium.obsqurazone.com/form-submit.php");
+        WebElement firstnameField= driver.findElement(By.xpath("//input[@id='validationCustom01']"));
+        firstnameField.sendKeys("krishnenthu");
+        WebElement lastnameField= driver.findElement(By.xpath("//input[@id='validationCustom02']"));
+        lastnameField.sendKeys("Gopal");
+        WebElement usernameField= driver.findElement(By.xpath("//input[@id='validationCustomUsername']"));
+        usernameField.sendKeys("Kgopal");
+        WebElement  zipField= driver.findElement(By.xpath("//input[@id='validationCustom05']"));
+        zipField.sendKeys("12345");
+        WebElement termsCheckBox= driver.findElement(By.xpath("//input[@id='invalidCheck']"));
+        termsCheckBox.click();
+        WebElement submitButton= driver.findElement(By.xpath("//button[@class='btn btn-primary']"));
+        submitButton.click();
+        WebElement cityValidation = driver.findElement(By.xpath("//input[@id='validationCustom03']//following-sibling::div[1]"));
+        String cityValidationActual = cityValidation.getText();
+        String cityValidationExpected = "Please provide a valid city.";
+        Assert.assertEquals(cityValidationActual, cityValidationExpected, "City field validation message is not correct");
+        WebElement stateValidation = driver.findElement(By.xpath("//input[@id='validationCustom04']//following-sibling::div[1]"));
+        String stateValidationActual = stateValidation.getText();
+        String stateValidationExpected = "Please provide a valid state.";
+        Assert.assertEquals(stateValidationActual, stateValidationExpected, "State field validation message is not correct");
+    }
+
+    @Test
+    public void TC_006_verifySubmitForm() {
+        driver.get("https://selenium.obsqurazone.com/form-submit.php");
+        WebElement firstnameField= driver.findElement(By.xpath("//input[@id='validationCustom01']"));
+        firstnameField.sendKeys("krishnenthu");
+        WebElement lastnameField= driver.findElement(By.xpath("//input[@id='validationCustom02']"));
+        lastnameField.sendKeys("Gopal");
+        WebElement usernameField= driver.findElement(By.xpath("//input[@id='validationCustomUsername']"));
+        usernameField.sendKeys("Kgopal");
+        WebElement cityField= driver.findElement(By.xpath("//input[@id='validationCustom03']"));
+        cityField.sendKeys("Thiruvalla");
+        WebElement stateField= driver.findElement(By.xpath("//input[@id='validationCustom04']"));
+        stateField.sendKeys("Kerala");
+        WebElement  zipField= driver.findElement(By.xpath("//input[@id='validationCustom05']"));
+        zipField.sendKeys("12345");
+        WebElement termsCheckBox= driver.findElement(By.xpath("//input[@id='invalidCheck']"));
+        termsCheckBox.click();
+        WebElement submitButton= driver.findElement(By.xpath("//button[@class='btn btn-primary']"));
+        submitButton.click();
+        WebElement successMessage= driver.findElement(By.xpath("//div[@id='message-one']"));
+        String actualMessage=successMessage.getText();
+        String expectedMessage="Form has been submitted successfully!";
+        Assert.assertEquals(actualMessage,expectedMessage,"Failed to submit the form");
+    }
+
+    @Test
+    public void TC_007_verifyNewsLetterSubscription() {
 
         driver.get("https://demowebshop.tricentis.com/");
         WebElement newsletter = driver.findElement(By.cssSelector("#newsletter-email"));
@@ -141,8 +182,7 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_006_verifyInstantDemoRequestForm() {
-
+    public void TC_008_verifyInstantDemoRequestForm() {
         driver.get("https://phptravels.com/demo/");
         WebElement fName = driver.findElement(By.cssSelector("input[name='first_name']"));
         fName.sendKeys("priya");
@@ -165,8 +205,36 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_007_verifyWebElementCommands() throws InterruptedException {
+    public void TC_009_verifyQuitAndClose() {
+        driver.get("https://demo.guru99.com/popup.php");
+        WebElement clickHereLink = driver.findElement(By.xpath("//a[text()='Click Here']"));
+        clickHereLink.click();
+    }
 
+    @Test
+    public void TC_010_verifyNavigateTo() {
+        // driver.get("https://demowebshop.tricentis.com/");
+        driver.navigate().to("https://demowebshop.tricentis.com/");
+    }
+
+    @Test
+    public void TC_011_verifyRefresh() {
+        driver.get("https://demowebshop.tricentis.com/");
+        driver.navigate().refresh();
+    }
+
+    @Test
+    public void TC_012_verifyForwardAndBackward() throws InterruptedException {
+        driver.get("https://demowebshop.tricentis.com/");
+        WebElement logInLink=driver.findElement(By.xpath("//a[text()='Log in']"));
+        logInLink.click();
+        Thread.sleep(10000);
+        driver.navigate().back();
+        Thread.sleep(10000);
+        driver.navigate().forward();
+    }
+        @Test
+    public void TC_013_verifyWebElementCommands() throws InterruptedException {
         driver.get("https://selenium.obsqurazone.com/ajax-form-submit.php");
         WebElement subject = driver.findElement(By.xpath("//input[@id='subject']"));
         subject.sendKeys("Selenium");
@@ -188,9 +256,7 @@ public class SeleniumBasics {
     }
 
     @Test
-
-    public void TC_008_verifyIsDisplayed() {
-
+    public void TC_014_verifyIsDisplayed() {
         driver.get("https://selenium.obsqurazone.com/ajax-form-submit.php");
         WebElement subject = driver.findElement(By.xpath("//input[@id='subject']"));
         subject.sendKeys("Selenium");
@@ -200,9 +266,7 @@ public class SeleniumBasics {
     }
 
     @Test
-
-    public void TC_009_verifyIsSelected() {
-
+    public void TC_015_verifyIsSelected() {
         driver.get("https://selenium.obsqurazone.com/check-box-demo.php");
         WebElement singleCheckbox = driver.findElement(By.id("gridCheck"));
         boolean statusBeforeClick = singleCheckbox.isSelected();
@@ -215,8 +279,7 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_010_verifyIsEnabled() {
-
+    public void TC_016_verifyIsEnabled() {
         driver.get("https://selenium.obsqurazone.com/ajax-form-submit.php");
         WebElement submitButton = driver.findElement(By.xpath("//input[@class='btn btn-primary']"));
         boolean status = submitButton.isEnabled();
@@ -236,7 +299,7 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_011_verifyDifferenceBetweenFindElementAndFindElements() {
+    public void TC_017_verifyDifferenceBetweenFindElementAndFindElements() {
 
         driver.get("https://selenium.obsqurazone.com/radio-button-demo.php");
         //WebElement radioButton = driver.findElement(By.id("inlineRadio11"));
@@ -250,9 +313,8 @@ public class SeleniumBasics {
             }
         }
     }
-
     @Test
-    public void TC_012_verifyMultipleWindowHandling() {
+    public void TC_018_verifyMultipleWindowHandling() {
         driver.get("https://demo.guru99.com/popup.php");
         String parentWindow = driver.getWindowHandle();
         System.out.println("parent window id = " + parentWindow);
@@ -276,7 +338,7 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_013_verifyMultipleWindowHandlingHomeWork1() {
+    public void TC_019_verifyMultipleWindowHandlingHomeWork1() {
         driver.get("https://demoqa.com/browser-windows");
         String parentWindow = driver.getWindowHandle();
         WebElement newTabButton = driver.findElement(By.id("tabButton"));
@@ -298,7 +360,7 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_013_verifyMultipleWindowHandlingHomeWork2() {
+    public void TC_020_verifyMultipleWindowHandlingHomeWork2() {
         driver.get("https://demoqa.com/browser-windows");
         String parentWindow = driver.getWindowHandle();
         WebElement newWindowbutton = driver.findElement(By.id("windowButton"));
@@ -320,7 +382,7 @@ public class SeleniumBasics {
     }
 
     @Test
-    public void TC_013_verifyMultipleWindowHandlingHomeWork3() {
+    public void TC_021_verifyMultipleWindowHandlingHomeWork3() {
         driver.get("https://demoqa.com/browser-windows");
         String parentWindow = driver.getWindowHandle();
         WebElement windowMessageButton = driver.findElement(By.id("messageWindowButton"));
@@ -339,6 +401,55 @@ public class SeleniumBasics {
             }
         }
         driver.switchTo().window(parentWindow);
+    }
 
+    @Test
+    public void TC_022_verifySimpleAlert(){
+
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement clickMe=driver.findElement(By.xpath("//button[@class='btn btn-success']"));
+        clickMe.click();
+        Alert alert=driver.switchTo().alert();
+        String alertText=alert.getText();
+        System.out.println(alertText);
+        alert.accept();
+    }
+    @Test
+    public void TC_023_verifyConfirmationAlert() {
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement clickMe=driver.findElement(By.xpath("//button[@class='btn btn-warning']"));
+        clickMe.click();
+        Alert alert=driver.switchTo().alert();
+        String alertText=alert.getText();
+        System.out.println(alertText);
+        alert.dismiss();
+    }
+
+    @Test
+    public void TC_024_verifyPromptAlert(){
+        driver.get("https://selenium.obsqurazone.com/javascript-alert.php");
+        WebElement clickMe=driver.findElement(By.xpath("//button[@class='btn btn-danger']"));
+        clickMe.click();
+        Alert alert=driver.switchTo().alert();
+        alert.sendKeys("kgopal");
+        String alertText=alert.getText();
+        System.out.println(alertText);
+        alert.accept();
+    }
+    @Test
+    public void TC_025_verifyTextInaFrame(){
+        driver.get("https://demoqa.com/frames");
+        List<WebElement> frames= driver.findElements(By.tagName("iframe"));
+        int numberOfFrames=frames.size();
+        System.out.println(numberOfFrames);
+        //driver.switchTo().frame("frame1");    /** switching to frame using id**/
+        // driver.switchTo().frame(4);          /** switching to frame using index**/
+        WebElement frame= driver.findElement(By.id("frame1"));  /** switching to frame using webelement**/
+        driver.switchTo().frame(frame);
+        WebElement heading= driver.findElement(By.id("sampleHeading"));
+        String text=heading.getText();
+        System.out.println(text);
+        driver.switchTo().parentFrame();  /** To switch to parent frame **/
+       // driver.switchTo().defaultContent()  /** Also used to switch to parent frame **/
     }
 }
