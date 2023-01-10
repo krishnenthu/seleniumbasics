@@ -8,7 +8,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -17,6 +17,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -603,4 +604,51 @@ public class SeleniumBasics {
         js.executeScript("document.getElementById('newsletter-email').value='Test@test.com'");
         js.executeScript("document.getElementById('newsletter-subscribe-button').click()");
     }
+    @Test
+    public void TC_037_verifyWaitInSelenium() {
+        driver.get("https://demowebshop.tricentis.com/");
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        WebElement emailField= driver.findElement(By.xpath("//input[@id='newsletter-email']"));
+        emailField.sendKeys("Test@test.com");
+        WebElement submitButton= driver.findElement(By.xpath("//input[@id='newsletter-subscribe-button']"));
+        WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(submitButton));
+        FluentWait fwait=new FluentWait<>(driver);
+        fwait.withTimeout(Duration.ofSeconds(10));
+        fwait.pollingEvery(Duration.ofSeconds(1));
+        fwait.until(ExpectedConditions.visibilityOf(submitButton));
+        submitButton.click();
+    }
+    @Test
+    public void TC_038_verifyScrollDownOfWebpage() {
+        driver.get("https://demo.guru99.com/test/guru99home/");
+        JavascriptExecutor js= (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+    }
+
+    @Test
+    public void TC_039_verifyScrollingToViewOfWebElement() {
+        driver.get("https://demo.guru99.com/test/guru99home/");
+        WebElement linux= driver.findElement(By.linkText("Linux"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();",linux);
+    }
+    @Test
+    public void TC_040_verifyScrollToBottomOfThePage() {
+        driver.get("https://demo.guru99.com/test/guru99home/");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0,document.body.scrollHeight)");
+    }
+    @Test
+    public void TC_041_verifyHorizontalScroll() {
+        driver.get("https://demo.guru99.com/test/guru99home/scrolling.html");
+        WebElement vbScript= driver.findElement(By.linkText("VBScript"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();",vbScript);
+    }
+
+
+
+
 }
