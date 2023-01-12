@@ -3,6 +3,8 @@ package seleniumbasics;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -15,6 +17,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -647,8 +652,39 @@ public class SeleniumBasics {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView();",vbScript);
     }
+    @Test
+    public void TC_042_verifyTable() throws IOException {
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        List <WebElement> rowElements=driver.findElements(By.xpath("//table[@id='customers']//tbody//tr"));
+        List <WebElement> columnElements=driver.findElements(By.xpath("//table[@id='customers']//tbody//tr//td"));
+        System.out.println(rowElements);
+        List<ArrayList<String>> actGridData=TableUtility.get_Dynamic_TwoDimension_TablElemnts(rowElements,columnElements);
+        List<ArrayList<String>> expGridData=ExcelUtility.excelDataReader("\\src\\test\\resources\\TestData.xlsx","Table");
+        Assert.assertEquals(actGridData,expGridData,"Invalid data found in table");
+    }
+
+    @Test
+    public void TC_043_verifyFileUploadUsingRobotClass() throws AWTException, InterruptedException {
+        driver.get("https://www.foundit.in/seeker/registration");
+        StringSelection s= new StringSelection("D:\\Javaprograms\\TestFileforFileupload.txt");
+        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(s,null);
+        WebElement chooseFile= driver.findElement(By.xpath("//span[text()='Choose CV']"));
+        chooseFile.click();
+        Robot r= new Robot();
+        Thread.sleep(5000);
+        r.keyPress(KeyEvent.VK_ENTER);
+        r.keyRelease(KeyEvent.VK_ENTER);
+        Thread.sleep(5000);
+        r.keyPress(KeyEvent.VK_CONTROL);
+        r.keyPress(KeyEvent.VK_V);
+        Thread.sleep(5000);
+        r.keyRelease(KeyEvent.VK_CONTROL);
+        r.keyRelease(KeyEvent.VK_V);
+        Thread.sleep(5000);
+        r.keyPress(KeyEvent.VK_ENTER);
+        r.keyRelease(KeyEvent.VK_ENTER);
 
 
 
-
+    }
 }
