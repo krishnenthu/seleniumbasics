@@ -11,8 +11,8 @@ public class TableUtility {
         int colunmSize = columnItems.size();  /** cells count** 18**/
         String[] columnList = new String[colunmSize / rSize]; /** 18/6=3** columnList - size of the array**/
         List<ArrayList<String>> gridData = new ArrayList<ArrayList<String>>();  /** 2 dimensional array**/
-        int x = 0;
-        for (int i = 0; i < rSize; i++) {
+        int x = 0;   // controlling cell value
+        for (int i = 0; i < rSize; i++) {    //
             for (int j = 0; j < columnList.length; j++) {
                 columnList[j] = columnItems.get(x).getText();
                 x++;
