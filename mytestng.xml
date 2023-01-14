@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Suite">
+    <test name="Functional Test">
+        <classes>
+            <class name="seleniumbasics.SeleniumBasics">
+                <methods>
+                    <include name="TC_001_verifyObsquraTitle"/>
+                    <include name="TC_002_simpleInputForm"/>
+                    <include name="TC_003_verifyTotal"/>
+                    <include name="TC_004_verifyEmptyFieldsValidation"/>
+                    <include name="TC_005_verifyEmptyFieldCityStateValidation"/>
+                    <include name="TC_006_verifySubmitForm"/>
+                    <include name="TC_007_verifyNewsLetterSubscription"/>
+                    <include name="TC_008_verifyInstantDemoRequestForm"/>
+                    <include name="TC_009_verifyQuitAndClose"/>
+                    <include name="TC_010_verifyNavigateTo"/>
+                    <include name="TC_011_verifyRefresh"/>
+                    <include name="TC_012_verifyForwardAndBackward"/>
+                    <include name="TC_013_verifyWebElementCommands"/>
+                    <include name="TC_014_verifyIsDisplayed"/>
+                    <include name="TC_015_verifyIsSelected"/>
+                    <include name="TC_016_verifyIsEnabled"/>
+                    <include name="TC_017_verifyDifferenceBetweenFindElementAndFindElements"/>
+                    <include name="TC_018_verifyMultipleWindowHandling"/>
+                    <include name="TC_019_verifyMultipleWindowHandlingHomeWork1"/>
+                    <include name="TC_020_verifyMultipleWindowHandlingHomeWork2"/>
+                    <include name="TC_021_verifyMultipleWindowHandlingHomeWork3"/>
+                    <include name="TC_022_verifySimpleAlert"/>
+                    <include name="TC_023_verifyConfirmationAlert"/>
+                    <include name="TC_024_verifyPromptAlert"/>
+                    <include name="TC_025_verifyTextInaFrame"/>
+                    <include name="TC_026_VerifyRightClick"/>
+                    <include name="TC_027_verifyDoubleClick"/>
+                    <include name="TC_028_verifyMouseOver"/>
+                    <include name="TC_029_verifyDragAndDrop"/>
+                    <include name="TC_030_verifyDragAndDropByOffset"/>
+                    <include name="TC_031_verifyDragAndDropHomeWork"/>
+                    <include name="TC_032_verifyResizeHomeWork"/>
+                    <include name="TC_033_verifyValuesInDropDown"/>
+                    <include name="TC_034_verifyMethodsInSelectClass"/>
+                    <include name="TC_035_verifyFileUploadInSelenium"/>
+                    <include name="TC_036_verifyClickAndSendKeysUsingJavaScriptExecutor"/>
+                    <include name="TC_037_verifyWaitInSelenium"/>
+                    <include name="TC_038_verifyScrollDownOfWebpage"/>
+                    <include name="TC_039_verifyScrollingToViewOfWebElement"/>
+                    <include name="TC_040_verifyScrollToBottomOfThePage"/>
+                    <include name="TC_041_verifyHorizontalScroll"/>
+                    <include name="TC_042_verifyTable"/>
+                    <include name="TC_043_verifyFileUploadUsingRobotClass"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

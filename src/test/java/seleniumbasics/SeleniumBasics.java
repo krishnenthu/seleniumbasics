@@ -13,9 +13,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.testng.Assert;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
@@ -49,13 +47,37 @@ public class SeleniumBasics {
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
     }
-
+    @BeforeSuite
+    public void beforeSuite(){
+        System.out.println("This is before Suite");
+    }
+    @BeforeTest
+    public void beforeTest(){
+        System.out.println("This is before Test");
+    }
+    @BeforeClass
+    public void beforeClass(){
+        System.out.println("This is before Class");
+    }
     @BeforeMethod
     public void setUp() {
         testInitialize("Chrome");
     }
 
-    /*  @AfterMethod
+    @AfterSuite
+    public void afterSuite(){
+        System.out.println("This is after Suite");
+    }
+    @AfterTest
+    public void afterTest(){
+        System.out.println("This is after Test");
+    }
+    @AfterClass
+    public void afterClass(){
+        System.out.println("This is after Class");
+    }
+
+    @AfterMethod
           public void tearDown(ITestResult result) throws IOException {
            if (result.getStatus()==ITestResult.FAILURE){
                TakesScreenshot takesScreenshot=(TakesScreenshot)driver;
@@ -65,8 +87,7 @@ public class SeleniumBasics {
               driver.close();
             //driver.quit();
 
-
-          }*/
+          }
     @Test
     public void TC_001_verifyObsquraTitle() {
 
