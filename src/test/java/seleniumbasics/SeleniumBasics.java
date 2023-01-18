@@ -21,10 +21,8 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 public class SeleniumBasics {
     WebDriver driver;
@@ -678,10 +676,12 @@ public class SeleniumBasics {
         driver.get("https://www.w3schools.com/html/html_tables.asp");
         List <WebElement> rowElements=driver.findElements(By.xpath("//table[@id='customers']//tbody//tr"));
         List <WebElement> columnElements=driver.findElements(By.xpath("//table[@id='customers']//tbody//tr//td"));
-        System.out.println(rowElements);
         List<ArrayList<String>> actGridData=TableUtility.get_Dynamic_TwoDimension_TablElemnts(rowElements,columnElements);
         List<ArrayList<String>> expGridData=ExcelUtility.excelDataReader("\\src\\test\\resources\\TestData.xlsx","Table");
         Assert.assertEquals(actGridData,expGridData,"Invalid data found in table");
+        System.out.println(actGridData);
+
+
     }
 
     @Test
@@ -704,8 +704,7 @@ public class SeleniumBasics {
         Thread.sleep(5000);
         r.keyPress(KeyEvent.VK_ENTER);
         r.keyRelease(KeyEvent.VK_ENTER);
-
-
-
     }
+
+
 }
