@@ -2,13 +2,15 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Failed suite [Parameter suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Parameter test(failed)">
+    <parameter name="pass_password" value="test123"/>
+    <parameter name="username_email" value="priyagopaltestn@gmail.com"/>
     <parameter name="browser" value="chrome"/>
     <parameter name="base_url" value="https://demowebshop.tricentis.com/"/>
     <classes>
       <class name="seleniumbasics.DemoWebShop">
         <methods>
+          <include name="TC_008_verifyValidLoginHomeworkWithParameter" invocation-numbers="0"/>
           <include name="tearDown"/>
-          <include name="TC_007_verifyValidLoginHomework" invocation-numbers="0 1"/>
           <include name="setUp"/>
         </methods>
       </class> <!-- seleniumbasics.DemoWebShop -->
