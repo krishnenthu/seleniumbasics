@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parameter suite">
+    <test  name="chrome test">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="base_url" value="https://demowebshop.tricentis.com/"/>
+        <parameter name="username_email" value="priyagopaltestn@gmail.com"/>
+        <parameter name="pass_password" value="test123"/>
+        <classes>
+            <class name="seleniumbasics.DemoWebShop">
+                <methods>
+                 <exclude name="TC_001_verifyDemoWebShopTitle"/>
+                    <exclude name="TC_ 002_verifyLogin"/>
+                    <exclude name="TC_003_verifyRegistration"/>
+                    <exclude name="TC_004_verifyDemoWebShopTitleWithExcelHomeWork"/>
+                    <exclude name="TC_005_verifyInvalidLoginWithDataProvider"/>
+                    <exclude name="TC_006_verifyRegistrationDataRandomGeneration"/>
+                    <exclude name="TC_007_verifyValidLoginWithDataProviderHomework"/>
+                    <include name="TC_008_verifyValidLoginWithParameterHomework"/>
+                    <include name="TC_009_verifyRegistrationWithExcelAndRandomDataGeneration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test  name="edge test">
+        <parameter name="browser" value="Edge"/>
+        <parameter name="base_url" value="https://demowebshop.tricentis.com/"/>
+        <parameter name="username_email" value="priyagopaltestn@gmail.com"/>
+        <parameter name="pass_password" value="test123"/>
+        <classes>
+            <class name="seleniumbasics.DemoWebShop">
+                <methods>
+                    <include name="TC_001_verifyDemoWebShopTitle"/>
+                    <include name="TC_ 002_verifyLogin"/>
+                    <include name="TC_003_verifyRegistration"/>
+                    <exclude name="TC_004_verifyDemoWebShopTitleWithExcelHomeWork"/>
+                    <exclude name="TC_005_verifyInvalidLoginWithDataProvider"/>
+                    <exclude name="TC_006_verifyRegistrationDataRandomGeneration"/>
+                    <exclude name="TC_007_verifyValidLoginWithDataProviderHomework"/>
+                    <exclude name="TC_008_verifyValidLoginWithParameterHomework"/>
+                    <exclude name="TC_009_verifyRegistrationWithExcelAndRandomDataGeneration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

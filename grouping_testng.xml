@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parameter suite">
+    <test name="chrome test">
+        <parameter name="browser" value="chrome"/>
+        <parameter name="base_url" value="https://demowebshop.tricentis.com/"/>
+        <parameter name="username_email" value="priyagopaltestn@gmail.com"/>
+        <parameter name="pass_password" value="test123"/>
+        <groups>
+            <run>
+                <include name="Regression"/>
+                <exclude name="Sanity"/>
+                <exclude name="Smoke"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="seleniumbasics.DemoWebShop">
+                <methods>
+                    <include name="TC_001_verifyDemoWebShopTitle"/>
+                    <include name="TC_ 002_verifyLogin"/>
+                    <include name="TC_003_verifyRegistration"/>
+                    <include name="TC_004_verifyDemoWebShopTitleWithExcelHomeWork"/>
+                    <include name="TC_005_verifyInvalidLoginWithDataProvider"/>
+                    <include name="TC_006_verifyRegistrationDataRandomGeneration"/>
+                    <include name="TC_007_verifyValidLoginWithDataProviderHomework"/>
+                    <include name="TC_008_verifyValidLoginWithParameterHomework"/>
+                    <include name="TC_009_verifyRegistrationWithExcelAndRandomDataGeneration"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
